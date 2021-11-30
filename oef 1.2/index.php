@@ -23,21 +23,20 @@
 <div class="container">
     <div class="row">
         <?php
+        //lijst met de steden en hun foto
         $citys=[
                 "Londen" =>"londen.jpg",
             "Parijs" => "parijs.jpg",
             "Berlijn" => "berlijn.jpg"
         ];
-
+        // alle steden overlopen en hun info uitprinten
         foreach($citys as $city => $img){
-            print '<div class="col-sm-4">';
-            print '<h3>'.ucfirst($city).'</h3>';
-            print '
+            print "<div class='col-sm-4'>
+            <h3>$city</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            ';
-            print '<img src="./img/'.$img.'" width="350px">';
-            print '</div>';
+            <img src='./img/$img' alt='$city' width='350px'>
+            </div>";
         }
         ?>
     </div>
