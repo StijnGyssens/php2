@@ -35,7 +35,7 @@
             <h3>$city</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-            <img src='./img/$img' alt='$city' width='350px'>
+            <img src='./img/$img' alt='$city' class='img-fluid'>
             </div>";
         }
         ?>
