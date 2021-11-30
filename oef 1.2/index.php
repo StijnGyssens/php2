@@ -23,15 +23,20 @@
 <div class="container">
     <div class="row">
         <?php
-        $citys=["londen","parijs","berlijn"];
-        foreach($citys as $city){
+        $citys=[
+                "Londen" =>"londen.jpg",
+            "Parijs" => "parijs.jpg",
+            "Berlijn" => "berlijn.jpg"
+        ];
+
+        foreach($citys as $city => $img){
             print '<div class="col-sm-4">';
             print '<h3>'.ucfirst($city).'</h3>';
             print '
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
             ';
-            print '<img src="./img/'.$city.'.jpg" width="350px">';
+            print '<img src="./img/'.$img.'" width="350px">';
             print '</div>';
         }
         ?>
