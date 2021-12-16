@@ -3,14 +3,11 @@ require_once "database.php";
 require_once "html_components.php"
 ?>
 
-
 <?php
 print PrintHead("Leuke plekken in Europa");
 print PrintBody();
 print PrintJumbo("Leuke plekken in Europa","Lijst met de beste bestemmingen");
 ?>
-
-
 
 <div class="container">
     <div class="row">
@@ -29,7 +26,6 @@ print PrintJumbo("Leuke plekken in Europa","Lijst met de beste bestemmingen");
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
             <img src='./img/".$row["img_filename"]."' alt='".$row["img_title"]."' class='img-fluid'>
-            <a href='./stad_form.php?img_id=".$row["img_id"]."'>Meer info</a>
             </div>";
             }
         }
@@ -46,4 +42,3 @@ print PrintJumbo("Leuke plekken in Europa","Lijst met de beste bestemmingen");
 <?php
 print PrintClose();
 ?>
-

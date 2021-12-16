@@ -63,7 +63,7 @@ function GetData($statement){
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
             <img src='./img/".$row["img_filename"]."' alt='".$row["img_title"]."' class='img-fluid'>
-            <a href='./stad.php?img_id=".$row["img_id"]."'>Meer info</a>
+            <a href='./stad_form.php?img_id=".$row["img_id"]."'>Meer info</a>
             </div>";
             }
         }
