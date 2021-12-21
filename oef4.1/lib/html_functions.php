@@ -15,6 +15,11 @@ function PrintJumbo( $title = "", $subtitle = "" )
     print $jumbo;
 }
 
+function PrintNavbar(){
+    $nav = file_get_contents("templates/navbar.html");
+    print $nav;
+}
+
 function MergeViewWithData( $template, $data )
 {
     $returnvalue = "";
