@@ -75,6 +75,8 @@ function SaveFormData()
         //run SQL
         $result = ExecuteSQL( $sql );
 
+        $_SESSION['msgs']=true;
+
         //output if not redirected
         print $sql ;
         print "<br>";

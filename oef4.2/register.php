@@ -5,7 +5,7 @@ ini_set( 'display_errors', 1 );
 require_once "lib/autoload.php";
 
 PrintHead();
-PrintJumbo( $title = "Bewerk afbeelding", $subtitle = "" );
+PrintJumbo( $title = "Registratie", $subtitle = "" );
 ?>
 
 <div class="container">
