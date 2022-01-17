@@ -11,10 +11,6 @@ require_once "security.php";
 
 $errors = [];
 
-if (!array_key_exists('msgs',$_SESSION)){
-    $_SESSION['msgs'] =false;
-}
-
 if ( key_exists( 'errors', $_SESSION ) AND is_array( $_SESSION['errors']) )
 {
     $errors = $_SESSION['errors'];

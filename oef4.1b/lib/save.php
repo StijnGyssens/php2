@@ -25,24 +25,13 @@ function SaveFormData()
 
         $table = $_POST['table'];
         $pkey = $_POST['pkey'];
-        $pass = $_POST['usr_password'];
-        $mail = $_POST['usr_email'];
 
         //validation
-
-        unset($_SESSION['errors']);
         $sending_form_uri = $_SERVER['HTTP_REFERER'];
         CompareWithDatabase( $table, $pkey );
-        ValidateUsrPassword($pass);
-        ValidateUsrEmail($mail);
 
         //terugkeren naar afzender als er een fout is
-        if (key_exists('errors',$_SESSION)){
-            if ( count($_SESSION['errors']) > 0 ) {
-                header( "Location: " . $sending_form_uri ); exit();
-            }
-        };
-
+        if ( count($_SESSION['errors']) > 0 ) { header( "Location: " . $sending_form_uri ); exit(); }
 
         //insert or update?
         if ( $_POST["$pkey"] > 0 ) $update = true;
@@ -58,11 +47,6 @@ function SaveFormData()
         {
             //skip non-data fields
             if ( in_array( $field, [ 'table', 'pkey', 'afterinsert', 'afterupdate', 'csrf' ] ) ) continue;
-
-            //password hash
-            if ($field=="usr_password"){
-                $value = password_hash($value,PASSWORD_DEFAULT );
-            }
 
             //handle primary key field
             if ( $field == $pkey )
@@ -85,8 +69,6 @@ function SaveFormData()
 
         //run SQL
         $result = ExecuteSQL( $sql );
-
-        $_SESSION['msgs']=true;
 
         //output if not redirected
         print $sql ;

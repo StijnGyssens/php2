@@ -10,25 +10,6 @@ PrintJumbo( $title = "Leuke plekken in Europa" ,
 PrintNavbar();
 ?>
 
-
-
-        <?php
-        if ($_SESSION['msgs']){
-            print '
-                <div class="container">
-                    <div class="row">
-                        <div class="alert alert-success">Bedankt voor uw registratie</div>
-                    </div>
-                </div>
-                ';
-        }
-        unset($_SESSION['msgs']);
-        ?>
-
-
-</body>
-</html>
-
 <div class="container">
     <div class="row">
 

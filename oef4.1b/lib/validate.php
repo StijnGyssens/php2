@@ -83,17 +83,6 @@ function isDate($date) {
     return date('Y-m-d', strtotime($date)) === $date;
 }
 
-function ValidateUsrPassword($pass){
-        if (strlen($pass)<8) {
-            $_SESSION['errors']["usr_password" . "_error"] = "Het wachtwoord moet minstens 8 tekens bevatten";
-        }
-}
-function ValidateUsrEmail($mail){
-    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['errors']["usr_email" . "_error"] = "Geen geldig e-mailadres!";
-    }
-}
-
 function GetFieldType( $definition )
 {
     $length = 0;
