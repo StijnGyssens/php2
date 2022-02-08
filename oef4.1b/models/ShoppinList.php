@@ -1,37 +1,26 @@
 <?php
-class  ShoppinList{
+class ShoppingList
+{
     # eigenschappen of properties
-    # zijn private(niet zomaar toegankelijk) , public(toegangkelijk of protected
-    private $shop;# bevat een string
-    private $date; #bevat DateTime
-    private $items=[];
+    # zijn public, private of protected
 
-    public function __construct($p_shop)
-    {
-        $this->setShop($p_shop);
-        $this->setDate(new DateTime());
-    }
-
-    public function setShop($naam_winkel){
-        if (strlen($naam_winkel)<4)die("Sorry, naam moet minstens 4 kar");
-        $this->shop=$naam_winkel;
-    }
+    private $shop; # bevat een string, bv. "Zeeman"
+    private $date; # bevat DateTime
+    private $items = [];
+    private $lengtevandenaam ;
 
     /**
-     * @param mixed $date
-     */
-    public function setDate($date): void
-    {
-        $this->date = $date;
-    }
-
-    /**
+     * @param $shop
+     * @param $date
      * @param array $items
      */
-    public function setItems(array $items): void
+    public function __construct( $p_shop, $p_date, array $p_items)
     {
-        $this->items = $items;
+        $this->setShop( $p_shop );
+        $this->date = $p_date;
+        $this->items = $p_items;
     }
+
 
     /**
      * @return mixed
@@ -42,10 +31,22 @@ class  ShoppinList{
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
-    public function getDate()
+    public function getDate(): DateTime
     {
+        return $this->date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateString():string
+    {
+        if ( $this->lengtevandenaam < 6 )
+        {
+            die("Sorry hoor, maar ik kan u de DateString niet geven als de naam korter is dan 6 tekens");
+        }
         return $this->date->format("d/m/Y");
     }
 
@@ -57,10 +58,38 @@ class  ShoppinList{
         return $this->items;
     }
 
-    public function getShoppingList(){
-        return [$this->shop,$this->date,$this->items];
+
+    # een methode is een function in een class
+    public function setShop( $naam_winkel ): self
+    {
+        if(strlen($naam_winkel) < 4) die("Sorry, de naam moet minstens 3 karakters bevatten");
+
+        $this->lengtevandenaam = strlen($naam_winkel);
+        $this->shop = $naam_winkel;
+        return $this;
     }
 
+    /**
+     * @param mixed $date
+     */
+    public function setDate($date): self
+    {
+        $this->date = $date;
+        return $this;
+    }
 
+    /**
+     * @param array $items
+     */
+    public function setItems(array $items): self
+    {
+        $this->items = $items;
+        return $this;
+    }
+
+    public function getAllTheProperties()
+    {
+        return [ $this->shop, $this->date, $this->items ];
+    }
 
 }

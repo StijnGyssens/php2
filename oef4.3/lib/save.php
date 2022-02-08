@@ -1,4 +1,6 @@
 <?php
+error_reporting( E_ALL );
+ini_set( 'display_errors', 1 );
 require_once "autoload.php";
 
 SaveFormData();
@@ -25,24 +27,25 @@ function SaveFormData()
 
         $table = $_POST['table'];
         $pkey = $_POST['pkey'];
-        $pass = $_POST['usr_password'];
-        $mail = $_POST['usr_email'];
 
         //validation
-
-        //unset($_SESSION['errors']);
         $sending_form_uri = $_SERVER['HTTP_REFERER'];
         CompareWithDatabase( $table, $pkey );
-        ValidateUsrPassword($pass);
-        ValidateUsrEmail($mail);
+
+        //Validaties voor het registratieformulier
+        if ( $table == "user" )
+        {
+                ValidateUsrPassword( $_POST['usr_password'] );
+                ValidateUsrEmail( $_POST['usr_email'] );
+                CheckUniqueUsrEmail( $_POST['usr_email'] );
+        }
 
         //terugkeren naar afzender als er een fout is
-        if (key_exists('errors',$_SESSION) && is_array($_SESSION['errors'])){
-            if ( count($_SESSION['errors']) > 0 ) {
-                header( "Location: " . $sending_form_uri ); exit();
-            }
-        };
-
+        if ( count($_SESSION['errors']) > 0 )
+        {
+            $_SESSION['OLD_POST'] = $_POST;
+            header( "Location: " . $sending_form_uri ); exit();
+        }
 
         //insert or update?
         if ( $_POST["$pkey"] > 0 ) $update = true;
@@ -59,11 +62,6 @@ function SaveFormData()
             //skip non-data fields
             if ( in_array( $field, [ 'table', 'pkey', 'afterinsert', 'afterupdate', 'csrf' ] ) ) continue;
 
-            //password hash
-            if ($field=="usr_password"){
-                $value = password_hash($value,PASSWORD_DEFAULT );
-            }
-
             //handle primary key field
             if ( $field == $pkey )
             {
@@ -71,8 +69,18 @@ function SaveFormData()
                 continue;
             }
 
-            //all other data-fields
-            $keys_values[] = " $field = '$value' " ;
+            if ( $field == "usr_password" ) //encrypt usr_password
+            {
+                $value = password_hash( $value, PASSWORD_BCRYPT );
+                $keys_values[] = " $field = '$value' " ;
+
+                $_SESSION['msgs'][] = "Bedankt voor uw registratie";
+            }
+            else //all other data-fields
+            {
+                $keys_values[] = " $field = '$value' " ;
+            }
+
         }
 
         $str_keys_values = implode(" , ", $keys_values );
@@ -85,8 +93,6 @@ function SaveFormData()
 
         //run SQL
         $result = ExecuteSQL( $sql );
-
-        $_SESSION['msgs'][]='Bedankt voor uw registratie 123';
 
         //output if not redirected
         print $sql ;

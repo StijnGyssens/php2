@@ -10,31 +10,17 @@ PrintJumbo( $title = "Leuke plekken in Europa" ,
 PrintNavbar();
 ?>
 
-
-
-        <?php
-        //if ($_SESSION['msgs'])
-        if (is_array($msgs) && count($msgs)>0)
-        {
-            print '
-                <div class="container">
-                    <div class="row">
-                        <div class="alert alert-success">'.$msgs[0].'</div>
-                    </div>
-                </div>
-                ';
-        }
-        //unset($_SESSION['msgs']);
-        ?>
-
-
-</body>
-</html>
-
 <div class="container">
     <div class="row">
 
 <?php
+    //toon messages als er zijn
+    foreach ( $msgs as $msg )
+    {
+        print '<div class="msgs">' . $msg . '</div>';
+    }
+
+
     //get data
     $data = GetData( "select * from images" );
 
